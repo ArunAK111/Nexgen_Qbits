@@ -59,3 +59,4 @@ def transcribe_gcs(gcs_uri, sample_rate=16000):
     operation = client.long_running_recognize(config=config, audio=audio)
     response = operation.result(timeout=90)  # Adjust timeout as needed
     return [result.alternatives[0].transcript for result in response.results]
+
