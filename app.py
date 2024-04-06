@@ -4,15 +4,17 @@ import wave
 from speech_processing import extract_audio, read_wave, frame_generator, vad_audio, upload_blob, transcribe_gcs
 import os
 
-# Setup Google Cloud Credentials
-# Make sure to set your Google Cloud credentials in your environment variables or in your session secrets if using Streamlit sharing
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/your/google-credentials.json"
+# Set page layout to wide
+st.set_page_config(layout="wide")
 
 st.title("Audio Processing and Transcription App")
 
 # Setup for file upload
 uploaded_file = st.file_uploader("Upload Video", type=["mp4", "avi"])
 if uploaded_file is not None:
+    # Display uploaded video with play/pause controls
+    st.video(uploaded_file, format="video/mp4", start_time=0)
+
     # Save uploaded video to a temporary file
     temp_video_path = "temp_video.mp4"
     with open(temp_video_path, "wb") as f:
